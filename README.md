@@ -6,11 +6,15 @@ K-mer counting from fasta files with user defined k-mer size
 
 # Ideas/to-do
 Implement loop over all assembled genomes to save k-mer csv files
+
 Merge individual csv files to one file to feed into random forest classifier:
 
-	K-mer1	K-mer2	K-mer3	Resistant
+K-mer1	K-mer2	K-mer3	Resistant
+	
 Sample1 100	321	32	0
+
 Sample2 83	72	831	0
+
 Sample3 93	732	632	1
 
 Implement command line functions k-mer counting script
