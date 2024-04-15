@@ -1,4 +1,5 @@
 from collections import defaultdict
+import csv
 
 def extract_kmers(sequence, k):
     kmers = defaultdict(int)
@@ -25,16 +26,29 @@ def main(fasta_file, k):
             for kmer, count in kmers.items():
                 total_kmers[kmer] += count # Update the dict with kmer count per contig
     
-    sorted_kmers = sorted(total_kmers.items(), key=lambda x: x[1], reverse=False)
+    #sorted_kmers = sorted(total_kmers.items(), key=lambda x: x[1], reverse=False)
     
-    for kmer, count in sorted_kmers:
-    	print(f'K-mer: {kmer} Count: {count}')
-    	
+    #for kmer, count in sorted_kmers:
+    	#print(f'K-mer: {kmer} Count: {count}')
+    
     return total_kmers
+    
+def save_to_csv(total_kmers, csv_file):
+    with open(csv_file, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['k-mer', 'count'])
+        for kmer, count in total_kmers.items():
+            writer.writerow([kmer, count])
+    	
 
 if __name__ == '__main__':
     fasta_file = '/home/sandervermeulen/Documents/GenomeML/Ecoli_assembled/ERR1218534/ERR1218534-contigs.fa' # Fasta file path
-    k = 13  # kmer size
+    k = 9  # kmer size
+    
     total_counts = main(fasta_file, k)
-    print("Total k-mers:", sum(total_counts.values()))
+    #print("Total k-mers:", sum(total_counts.values()))
+    
+    csv_file = '/home/sandervermeulen/Documents/GenomeML/Ecoli_kmers/test.csv'
+    save_to_csv(total_counts, csv_file)
+    print(f"K-mers saved to {csv_file}")
 
