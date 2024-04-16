@@ -1,20 +1,22 @@
+#!/usr/bin/env python3
+
 from collections import defaultdict
 import csv
 
 def extract_kmers(sequence, k):
     kmers = defaultdict(int)
-    for i in range(len(sequence) - k + 1):
-        kmer = sequence[i:i+k]
+    for i in range(len(sequence) - k + 1): # Calculate number of kmers that can be extracted from seq
+        kmer = sequence[i:i+k] # Extract all possible kmers from seq
         kmers[kmer] += 1
     return kmers
 
-def main(fasta_file, k):
+def count_kmers(fasta_file, k):
     total_kmers = defaultdict(int) # Empty dict to store kmer count
     with open(fasta_file, 'r') as f:
         sequence = ''
         for line in f:
-            if line.startswith('>'): # To filter fasta header 
-                if sequence: # Check if there is a sequence in the var
+            if line.startswith('>'): # To detect the fasta header
+                if sequence: # Check if there is a sequence in the var, mainly for the first header
                     kmers = extract_kmers(sequence, k)
                     for kmer, count in kmers.items():
                         total_kmers[kmer] += count # Update the dict with kmer count per contig
@@ -39,16 +41,4 @@ def save_to_csv(total_kmers, csv_file):
         writer.writerow(['k-mer', 'count'])
         for kmer, count in total_kmers.items():
             writer.writerow([kmer, count])
-    	
-
-if __name__ == '__main__':
-    fasta_file = '/home/sandervermeulen/Documents/GenomeML/Ecoli_assembled/ERR1218534/ERR1218534-contigs.fa' # Fasta file path
-    k = 9  # kmer size
-    
-    total_counts = main(fasta_file, k)
-    #print("Total k-mers:", sum(total_counts.values()))
-    
-    csv_file = '/home/sandervermeulen/Documents/GenomeML/Ecoli_kmers/test.csv'
-    save_to_csv(total_counts, csv_file)
-    print(f"K-mers saved to {csv_file}")
 
