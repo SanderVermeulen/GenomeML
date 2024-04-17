@@ -7,6 +7,8 @@ K-mer counting from fasta files with user defined k-mer size
 # Ideas/to-do
 Implement loop over all assembled genomes to save k-mer csv files (separate bash script)
 
+At the moment the program only considers non-canonical k-mers. Can change this to support canonical k-mers if precision is bad.
+
 Merge individual csv files to one file to feed into random forest classifier:
 
 K-mer1	K-mer2	K-mer3	Resistant
