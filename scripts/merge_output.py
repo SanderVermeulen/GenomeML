@@ -36,6 +36,19 @@ folder = "/home/sandervermeulen/Documents/GenomeML/Ecoli_kmers/kmer_7/"
 
 merged_df = merge_csv_files(folder)
 
+# Read the resistance information csv file into a df
+resistance_file = "/media/sf_Project_GenomeML/Accessions_scripts/AMP_only_filtered.csv"
+resistance_df = pd.read_csv(resistance_file)
+
+# Merge the k-mer df with the resistance information df based on 'Lane.accession'
+merged_df = pd.merge(merged_df, resistance_df, left_on='index', right_on='Lane.accession', how='left')
+
+# Map the resistance labels ('R' and 'S') to numerical values (0 and 1)
+merged_df['Resistance'] = merged_df['AMP'].map({'R': 0, 'S': 1})
+
+# Drop unnecessary columns
+merged_df.drop(columns=['ENA.Accession.Number', 'Isolate', 'Lane.accession', 'AMP'], inplace=True)
+
 # Save the merged df to a new csv file
-output_csv = "/home/sandervermeulen/Documents/GenomeML/Ecoli_kmers/kmer_7/output_kmer7.csv"
+output_csv = "/home/sandervermeulen/Documents/GenomeML/Ecoli_kmers/kmer_7/output_kmer7_res.csv"
 merged_df.to_csv(output_csv, index=False)
