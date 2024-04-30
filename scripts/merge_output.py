@@ -31,8 +31,8 @@ def merge_csv_files(folder):
     
     return merged_df
 
-# Folder containing csv files from GenomeML
-folder = "/home/sandervermeulen/Documents/GenomeML/Ecoli_kmers/kmer_7/"
+# Folder containing csv files from GenomeML ***EDIT THIS***
+folder = "/home/sandervermeulen/Documents/GenomeML/Ecoli_kmers/kmer_11/"
 
 merged_df = merge_csv_files(folder)
 
@@ -49,6 +49,6 @@ merged_df['Resistance'] = merged_df['AMP'].map({'R': 0, 'S': 1})
 # Drop unnecessary columns
 merged_df.drop(columns=['ENA.Accession.Number', 'Isolate', 'Lane.accession', 'AMP'], inplace=True)
 
-# Save the merged df to a new csv file
-output_csv = "/home/sandervermeulen/Documents/GenomeML/Ecoli_kmers/kmer_7/output_kmer7_res.csv"
+# Save the merged df to a new csv file ***EDIT THIS***
+output_csv = "/home/sandervermeulen/Documents/GenomeML/Ecoli_kmers/kmer_11/output_kmer11_res.csv"
 merged_df.to_csv(output_csv, index=False)
