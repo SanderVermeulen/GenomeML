@@ -1,5 +1,5 @@
 # GenomeML
-Detecting antimicrobial resistance in assembled genomes by counting k-mers using machine learning.
+Detecting antimicrobial resistance in assembled genomes by counting k-mers using machine learning. WIP.
 
 # Current features
 K-mer counting from fasta files with user defined k-mer size. Additionally, when provided with proper input data (see Usage), able to merge output data from the k-mer counting with resistance information to a machine learning friendly format. A script for training the data on the Random Forest algorithm is also included.
