@@ -11,7 +11,35 @@ Input requires assembled fasta files of the dataset that will be used for traini
 abyss-pe j=6 k=35 name=${accession} B=14G in="${file1} ${file2}" -C "${output_folder}/${accession}"
 ```
 
-The k-mer counting program is usable with the command line.
+The k-mer counting program is usable with the command line by running 
+```
+GenomeML.py 
+```
+with appropiate options in the command line:
+
+```
+usage: GenomeML.py [-h] [-k KMER_SIZE] [-o OUTPUT_CSV] fasta_file
+
+Extract k-mers from a fasta file and save to a csv file
+
+positional arguments:
+  fasta_file            Path to the fasta file
+
+options:
+  -h, --help            show this help message and exit
+  -k KMER_SIZE, --kmer_size KMER_SIZE
+                        Size of k-mers (default: 7)
+  -o OUTPUT_CSV, --output_csv OUTPUT_CSV
+                        Path to the output csv file (default: output.csv)
+```
+
+The command line only takes one input fasta file, but the program can be easily looped to take more. See 
+```
+GenomeML_run.sh
+```
+for a simple bash loop to analyze a dataset.
+
+Be aware that increasing the k-mer size drastically increases the size of the output csv due to the vast increase of unique k-mers found for higher values of k. Using a dataset consisting of 586 assembled E. coli genomes, the merged output size was 44.6 MB with k=5, and increased to 1.1 GB with k=9. 
 
 # Ideas/to-do
 At the moment the program only considers non-canonical k-mers. Can change this to support canonical k-mers to see if this improves performance.
