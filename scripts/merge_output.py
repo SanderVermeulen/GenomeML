@@ -32,11 +32,11 @@ def merge_csv_files(folder):
     return merged_df
 
 # Folder containing csv files from GenomeML ***EDIT THIS***
-folder = "/home/sandervermeulen/Documents/GenomeML/Ecoli_kmers/kmer_11/"
+folder = "/home/sandervermeulen/Documents/GenomeML/Ecoli_kmers/kmer_9/"
 
 merged_df = merge_csv_files(folder)
 
-# Read the resistance information csv file into a df
+# Read the resistance information csv file into a df ***EDIT THIS***
 resistance_file = "/media/sf_Project_GenomeML/Accessions_scripts/AMP_only_filtered.csv"
 resistance_df = pd.read_csv(resistance_file)
 
@@ -50,5 +50,5 @@ merged_df['Resistance'] = merged_df['AMP'].map({'R': 0, 'S': 1})
 merged_df.drop(columns=['ENA.Accession.Number', 'Isolate', 'Lane.accession', 'AMP'], inplace=True)
 
 # Save the merged df to a new csv file ***EDIT THIS***
-output_csv = "/home/sandervermeulen/Documents/GenomeML/Ecoli_kmers/kmer_11/output_kmer11_res.csv"
+output_csv = "/home/sandervermeulen/Documents/GenomeML/Ecoli_kmers/kmer_9/output_kmer9_res.csv"
 merged_df.to_csv(output_csv, index=False)
