@@ -48,6 +48,8 @@ Make the requirements of the data merging and Random Forest training not hard co
 
 Add results on impact between canonical and non-canonical mode.
 
+Canonical mode currently ignores k-mers that contain hard and soft masked bases (N/n and c, g, a, t). Might change this to include these bases, like non-canonical mode, if results are expected.
+
 # Data source
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6310291/#pcbi.1006258.s010
 
